@@ -23,7 +23,9 @@ export class TasksController {
   constructor(private tasksService: TasksService) {}
 
   @Get()
-  getTasks(@Query() filterDto: GetTasksFilterDto): PagedResponse<Task[]> {
+  getTasks(
+    @Query(ValidationPipe) filterDto: GetTasksFilterDto
+  ): PagedResponse<Task[]> {
     let data: Task[];
     if (Object.keys(filterDto).length) {
       data = this.tasksService.getTasksWithFilters(filterDto);
